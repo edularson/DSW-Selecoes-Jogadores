@@ -1,0 +1,27 @@
+ng version
+
+sudo ng new front-selecoes
+
+cd front-selecoes
+
+ng serve
+
+link para abrir o site: http://localhost:4200/
+
+ng generate guard guards/auth --skip-tests
+
+ng generate interceptor interceptors/auth --skip-tests
+
+ng generate class models/Selecao --skip-tests
+
+ng generate service services/selecao --skip-tests
+
+ng generate component views/selecao-form --skip-tests
+
+ng generate class models/Jogador --skip-tests
+
+ng generate service services/jogador --skip-tests
+
+ng generate component views/jogador-list --skip-tests
+
+ng generate component views/jogador-form --skip-tests

@@ -1,0 +1,29 @@
+npm init -y
+
+sudo npm install typescript ts-node-dev tsconfig-paths -D
+
+sudo npm install @types/node -D
+
+npx tsc --init
+
+sudo npm install express cors express-async-errors reflect-metadata
+
+sudo npm install @types/express @types/cors -D
+
+sudo npm install typeorm@0.2.45 pg
+
+sudo npm install bcryptjs jsonwebtoken celebrate date-fns
+
+sudo npm install @types/bcryptjs @types/jsonwebtoken @types/joi -D
+
+npm run typeorm migration:create -- -n CreateUsers
+
+npm run typeorm migration:run
+
+npm run typeorm migration:create -- -n CreateSelecoes
+
+npm run typeorm migration:run
+
+npm run typeorm migration:create -- -n CreateJogadores
+
+npm run typeorm migration:run
