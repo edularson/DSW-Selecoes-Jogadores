@@ -1,0 +1,48 @@
+<div class="form-container">
+    <div class="form-card">
+      <h2>{{ pageTitle }}</h2>
+      <p>Preencha os dados para cadastrar um novo jogador</p>
+  
+      <form #form="ngForm" (ngSubmit)="save()">
+        <div class="input-group">
+          <label for="nome">Nome do Jogador</label>
+          <input type="text" name="nome" [(ngModel)]="jogador.nome" required>
+        </div>
+  
+        <div class="input-group">
+          <label for="posicao">Posição</label>
+          <input type="text" name="posicao" [(ngModel)]="jogador.posicao" required>
+        </div>
+  
+        <div class="input-group">
+          <label for="selecao">Seleção</label>
+          <select name="selecao_id" [(ngModel)]="jogador.selecao_id" required>
+            <option [ngValue]="undefined" disabled>Selecione uma seleção</option>
+            <option *ngFor="let selecao of selecoes" [value]="selecao.id">
+              {{ selecao.pais }}
+            </option>
+          </select>
+        </div>
+  
+        <div class="input-group">
+          <label for="numero">Número da Camisa</label>
+          <input type="number" name="numero" [(ngModel)]="jogador.numero" required>
+        </div>
+  
+        <div class="input-group">
+          <label for="clube">Clube Atual</label>
+          <input type="text" name="clube" [(ngModel)]="jogador.clube" required>
+        </div>
+  
+        <div class="input-group">
+          <label for="data_nascimento">Data de Nascimento</label>
+          <input type="date" name="data_nascimento" [(ngModel)]="jogador.data_nascimento" required>
+        </div>
+  
+        <div class="button-group">
+          <button type="submit" class="save-button">Salvar</button>
+          <button type="button" (click)="cancel()" class="cancel-button">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>

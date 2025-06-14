@@ -1,0 +1,108 @@
+.form-container {
+    min-height: 100vh;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #1a2a1a;
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://www.transparenttextures.com/patterns/grass-works.png');
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Card do formulário */
+  .form-card {
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+    border-radius: 15px;
+    background-color: rgba(10, 25, 10, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 127, 0.3);
+    box-shadow: 0 0 25px rgba(0, 255, 127, 0.2);
+    color: #ffffff;
+  }
+  
+  .form-card h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #00ff7f;
+  }
+  
+  .form-card p {
+    text-align: center;
+    color: #ccc;
+    margin-bottom: 30px;
+  }
+  
+  .input-group {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #ccc;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 12px 10px;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 2px solid #555;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input-group input:focus {
+    outline: none;
+    border-color: #00ff7f;
+  }
+  
+  /* Botões */
+  .save-button, .cancel-button {
+    width: calc(50% - 10px);
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .save-button {
+    background-color: #00ff7f;
+    color: #111;
+  }
+  
+  .cancel-button {
+    background-color: transparent;
+    color: #ccc;
+    border: 2px solid #555;
+  }
+  
+  .save-button:hover {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .cancel-button:hover {
+    background-color: #555;
+    color: #fff;
+  }
+  
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }

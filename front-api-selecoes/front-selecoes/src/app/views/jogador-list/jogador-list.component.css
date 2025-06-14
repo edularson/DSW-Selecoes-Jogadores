@@ -1,0 +1,231 @@
+.dashboard-container {
+    min-height: 100vh;
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    background-color: #1a2a1a;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('https://www.transparenttextures.com/patterns/grass-works.png');
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.create-button {
+    background-color: #00ff7f;
+    color: #111;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.create-button:hover {
+    transform: scale(1.05);
+}
+
+.table-container {
+    background-color: rgba(10, 25, 10, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 127, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+thead th {
+    color: #00ff7f;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody td {
+    color: #ccc;
+}
+
+tbody td:first-child {
+    font-weight: 600;
+    color: #fff;
+}
+
+.actions button {
+    margin-right: 10px;
+    background: transparent;
+    border: 1px solid;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-button {
+    color: #5bc0de;
+    border-color: #5bc0de;
+}
+
+.delete-button {
+    color: #d9534f;
+    border-color: #d9534f;
+}
+
+.edit-button:hover {
+    background-color: #5bc0de;
+    color: #fff;
+}
+
+.delete-button:hover {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.dashboard-container {
+    min-height: 100vh;
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    background-color: #1a2a1a;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('https://www.transparenttextures.com/patterns/grass-works.png');
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.create-button,
+.back-button {
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 15px;
+}
+
+.create-button {
+    background-color: #00ff7f;
+    color: #111;
+}
+
+.create-button:hover {
+    transform: scale(1.05);
+}
+
+.back-button {
+    background-color: transparent;
+    color: #ccc;
+    border: 2px solid #555;
+}
+
+.back-button:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+.table-container {
+    background-color: rgba(10, 25, 10, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 127, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+thead th {
+    color: #00ff7f;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody td {
+    color: #ccc;
+}
+
+tbody td:first-child {
+    font-weight: 600;
+    color: #fff;
+}
+
+.actions button {
+    margin-right: 10px;
+    background: transparent;
+    border: 1px solid;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-button {
+    color: #5bc0de;
+    border-color: #5bc0de;
+}
+
+.delete-button {
+    color: #d9534f;
+    border-color: #d9534f;
+}
+
+.edit-button:hover {
+    background-color: #5bc0de;
+    color: #fff;
+}
+
+.delete-button:hover {
+    background-color: #d9534f;
+    color: #fff;
+}

@@ -1,0 +1,34 @@
+<div class="form-container">
+    <div class="form-card">
+        <h2>{{ pageTitle }}</h2>
+        <p>Preencha os dados para cadastrar uma nova seleção</p>
+
+        <form #form="ngForm" (ngSubmit)="save()">
+            <div class="input-group">
+                <label for="pais">País</label>
+                <input type="text" name="pais" placeholder="Ex: Brasil" [(ngModel)]="selecao.pais" required>
+            </div>
+            <div class="input-group">
+                <label for="tecnico">Técnico</label>
+                <input type="text" name="tecnico" placeholder="Ex: Dorival Júnior" [(ngModel)]="selecao.tecnico"
+                    required>
+            </div>
+            <div class="input-group">
+                <label for="confederacao">Confederação</label>
+                <input type="text" name="confederacao" placeholder="Ex: CONMEBOL" [(ngModel)]="selecao.confederacao"
+                    required>
+            </div>
+            <div class="input-group">
+                <label for="ranking">Ranking FIFA</label>
+                <input type="number" name="ranking" placeholder="Ex: 5" [(ngModel)]="selecao.ranking_fifa" required>
+            </div>
+            <div class="input-group">
+                <label for="titulos">Títulos da Copa</label>
+                <input type="number" name="titulos" placeholder="Ex: 5" [(ngModel)]="selecao.titulos_copa" required>
+            </div>
+
+            <button type="submit" class="save-button">Salvar</button>
+            <button type="button" (click)="cancel()" class="cancel-button">Cancelar</button>
+        </form>
+    </div>
+</div>
