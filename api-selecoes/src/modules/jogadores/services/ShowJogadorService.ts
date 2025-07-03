@@ -1,6 +1,7 @@
-import { getRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 import Jogador from '../typeorm/entities/Jogador';
 import AppError from '@shared/errors/AppError';
+import { JogadorRepository } from '../typeorm/repositories/JogadorRepository';
 
 interface IRequest {
   id: string;
@@ -8,10 +9,8 @@ interface IRequest {
 
 export default class ShowJogadorService {
   public async execute({ id }: IRequest): Promise<Jogador> {
-    const jogadoresRepository = getRepository(Jogador);
-    const jogador = await jogadoresRepository.findOne(id, {
-      relations: ['selecao'], // Também traz os dados da seleção junto
-    });
+    const jogadoresRepository = getCustomRepository(JogadorRepository);
+    const jogador = await jogadoresRepository.findById(id); // Usando nosso novo método
 
     if (!jogador) {
       throw new AppError('Player not found.', 404);

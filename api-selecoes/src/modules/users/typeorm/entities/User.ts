@@ -1,19 +1,31 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-
-@Entity('users')
-export default class User{
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+  } from 'typeorm';
+  
+  @Entity('users')
+  export default class User {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id!: string;
+  
     @Column()
-    name: string;
+    name!: string;
+  
     @Column()
-    email: string;
-    @Column()
+    email!: string;
+  
+    @Column({ select: false })
     password?: string;
-    @Column()
-    avatar: string;
+  
+    @Column({ nullable: true })
+    avatar?: string;
+  
     @CreateDateColumn()
-    created_at: Date;
+    created_at!: Date;
+  
     @UpdateDateColumn()
-    updated_at: Date;
-}
+    updated_at!: Date;
+  }

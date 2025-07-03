@@ -1,6 +1,7 @@
-import { getRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 import Selecao from '../typeorm/entities/Selecao';
 import AppError from '@shared/errors/AppError';
+import { SelecaoRepository } from '../typeorm/repositories/SelecaoRepository';
 
 interface IRequest {
   pais: string;
@@ -10,14 +11,10 @@ interface IRequest {
   titulos_copa: number;
 }
 
-class CreateSelecaoService {
+export default class CreateSelecaoService {
   public async execute({ pais, tecnico, confederacao, ranking_fifa, titulos_copa }: IRequest): Promise<Selecao> {
-    const selecoesRepository = getRepository(Selecao);
-
-    // Verifica se já existe uma seleção com o mesmo país
-    const paisExists = await selecoesRepository.findOne({
-      where: { pais },
-    });
+    const selecoesRepository = getCustomRepository(SelecaoRepository);
+    const paisExists = await selecoesRepository.findByPais(pais);
 
     if (paisExists) {
       throw new AppError('There is already a team from this country.');
@@ -36,5 +33,3 @@ class CreateSelecaoService {
     return selecao;
   }
 }
-
-export default CreateSelecaoService;

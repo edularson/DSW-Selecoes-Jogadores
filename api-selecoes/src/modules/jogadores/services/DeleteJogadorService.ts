@@ -1,6 +1,6 @@
-import { getRepository } from 'typeorm';
-import Jogador from '../typeorm/entities/Jogador';
+import { getCustomRepository } from 'typeorm';
 import AppError from '@shared/errors/AppError';
+import { JogadorRepository } from '../typeorm/repositories/JogadorRepository';
 
 interface IRequest {
   id: string;
@@ -8,7 +8,7 @@ interface IRequest {
 
 export default class DeleteJogadorService {
   public async execute({ id }: IRequest): Promise<void> {
-    const jogadoresRepository = getRepository(Jogador);
+    const jogadoresRepository = getCustomRepository(JogadorRepository);
     const jogador = await jogadoresRepository.findOne(id);
 
     if (!jogador) {

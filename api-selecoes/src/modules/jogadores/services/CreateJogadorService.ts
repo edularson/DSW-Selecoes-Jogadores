@@ -1,32 +1,31 @@
-import { getRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 import Jogador from '../typeorm/entities/Jogador';
-import Selecao from '@modules/selecoes/typeorm/entities/Selecao';
 import AppError from '@shared/errors/AppError';
+import { JogadorRepository } from '../typeorm/repositories/JogadorRepository';
+import { SelecaoRepository } from '@modules/selecoes/typeorm/repositories/SelecaoRepository';
 
 interface IRequest {
   nome: string;
-  posicao: string;
+  posicao: string; 
   numero: number;
-  clube: string;
-  data_nascimento: Date;
-  selecao_id: string; // ID da seleção a que ele pertence
+  clube: string; 
+  data_nascimento: Date; 
+  selecao_id: string;
 }
 
 export default class CreateJogadorService {
   public async execute(data: IRequest): Promise<Jogador> {
-    const jogadoresRepository = getRepository(Jogador);
-    const selecoesRepository = getRepository(Selecao);
+    const jogadoresRepository = getCustomRepository(JogadorRepository);
+    const selecoesRepository = getCustomRepository(SelecaoRepository);
 
-    // Verifica se a seleção informada existe
-    const selecao = await selecoesRepository.findOne(data.selecao_id);
+    // Usando o método customizado do SelecaoRepository
+    const selecao = await selecoesRepository.findById(data.selecao_id);
     if (!selecao) {
       throw new AppError('Team not found.');
     }
 
     const jogador = jogadoresRepository.create(data);
-
     await jogadoresRepository.save(jogador);
-
     return jogador;
   }
 }

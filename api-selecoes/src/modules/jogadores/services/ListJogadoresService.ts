@@ -1,16 +1,11 @@
-import { getRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 import Jogador from '../typeorm/entities/Jogador';
+import { JogadorRepository } from '../typeorm/repositories/JogadorRepository';
 
 export default class ListJogadoresService {
   public async execute(): Promise<Jogador[]> {
-    const jogadoresRepository = getRepository(Jogador);
-
-    // A opção "relations" diz ao TypeORM para fazer um JOIN
-    // e trazer os dados da entidade 'selecao' junto.
-    const jogadores = await jogadoresRepository.find({
-      relations: ['selecao'],
-    });
-
+    const jogadoresRepository = getCustomRepository(JogadorRepository);
+    const jogadores = await jogadoresRepository.findAllWithSelecao(); // Usando nosso novo método
     return jogadores;
   }
 }

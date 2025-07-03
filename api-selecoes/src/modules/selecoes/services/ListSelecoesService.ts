@@ -1,13 +1,11 @@
-import { getRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 import Selecao from '../typeorm/entities/Selecao';
+import { SelecaoRepository } from '../typeorm/repositories/SelecaoRepository';
 
-// Usando a sintaxe de exportação que você pediu
 export default class ListSelecoesService {
   public async execute(): Promise<Selecao[]> {
-    const selecoesRepository = getRepository(Selecao);
-
+    const selecoesRepository = getCustomRepository(SelecaoRepository);
     const selecoes = await selecoesRepository.find();
-
     return selecoes;
   }
 }
