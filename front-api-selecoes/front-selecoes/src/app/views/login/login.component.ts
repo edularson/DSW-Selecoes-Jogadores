@@ -16,15 +16,16 @@ export class LoginComponent {
   login() {
     this.authService.login(this.user).subscribe({
       next: (response) => {
-        console.log('Login bem-sucedido! Token:', response.token);
-
-        this.authService.setToken(response.token); // Salva o token
-
+        this.authService.saveSession(response.token, response.user);
         this.router.navigate(['/home']);
       },
       error: (err) => {
         alert(err.error.message);
       }
     });
+  }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
   }
 }

@@ -1,24 +1,59 @@
 <div class="dashboard-container">
-    <header class="dashboard-header">
-      <h1>Dashboard de Seleções</h1>
-      <div>
-        <button (click)="goToCreate()" class="create-button">Adicionar Seleção</button>
-        <button (click)="goToJogadores()" class="manage-button">Gerenciar Jogadores</button>
-        <button (click)="logout()" class="logout-button">Sair</button>
-      </div>
-    </header>
   
-    <div class="selecoes-grid">
-      <div *ngFor="let selecao of selecoes" class="selecao-card">
-        <h2>{{ selecao.pais }}</h2>
+  <input type="file" id="userAvatarUpload" (change)="onUserFileSelected($event)" style="display: none;">
+
+  <mat-toolbar class="dashboard-header">
+    
+    <img [src]="userAvatarUrl" 
+         alt="Avatar do Usuário" 
+         class="toolbar-user-avatar"
+         (click)="triggerUserFileInput()"
+         matTooltip="Mudar meu avatar">
+    
+    <span class="spacer"></span>
+    
+    <button mat-stroked-button (click)="goToCreate()" matTooltip="Adicionar nova seleção">
+      <mat-icon>add</mat-icon> Adicionar Seleção
+    </button>
+    <button mat-stroked-button (click)="goToJogadores()" matTooltip="Gerenciar jogadores">
+      <mat-icon>group</mat-icon> Gerenciar Jogadores
+    </button>
+    <button mat-icon-button color="warn" (click)="logout()" matTooltip="Sair">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="selecoes-grid">
+    <mat-card *ngFor="let selecao of selecoes" class="selecao-card">
+      <img mat-card-image [src]="selecao.avatarUrl" alt="Avatar da Seleção" class="selecao-avatar-image">
+      <mat-card-header>
+        <mat-card-title>{{ selecao.pais }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
         <p><strong>Técnico:</strong> {{ selecao.tecnico }}</p>
         <p><strong>Confederação:</strong> {{ selecao.confederacao }}</p>
         <p><strong>Ranking FIFA:</strong> {{ selecao.ranking_fifa }}</p>
         <p><strong>Títulos da Copa:</strong> {{ selecao.titulos_copa }}</p>
-        <div class="card-actions">
-          <button (click)="editSelecao(selecao.id)" class="edit-button">Editar</button>
-          <button (click)="deleteSelecao(selecao.id)" class="delete-button">Deletar</button>
-        </div>
-      </div>
-    </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <input 
+          type="file" 
+          [id]="'selecaoAvatarUpload-' + selecao.id" 
+          (change)="onSelecaoFileSelected($event, selecao)" 
+          style="display: none;"
+        >
+        <button mat-icon-button color="accent" (click)="triggerSelecaoFileInput(selecao.id)" matTooltip="Mudar Avatar">
+          <mat-icon>image</mat-icon>
+        </button>
+        <span class="card-action-spacer"></span>
+        <button mat-icon-button color="primary" (click)="editSelecao(selecao.id)" matTooltip="Editar">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteSelecao(selecao.id)" matTooltip="Deletar">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
+
+</div>

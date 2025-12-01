@@ -1,34 +1,52 @@
 <div class="form-container">
-    <div class="form-card">
-        <h2>{{ pageTitle }}</h2>
-        <p>Preencha os dados para cadastrar uma nova seleção</p>
-
+    <mat-card class="form-card">
+      <mat-card-header>
+        <mat-card-title>{{ pageTitle }}</mat-card-title>
+      </mat-card-header>
+  
+      <mat-card-content>
+        
+        <div class="avatar-section">
+          <img [src]="avatarUrl" alt="Avatar da Seleção" class="avatar-image">
+          
+          <button mat-mini-fab color="primary" class="upload-fab-button" (click)="triggerFileInput()" matTooltip="Mudar Avatar">
+            <mat-icon>edit</mat-icon>
+          </button>
+  
+          <input type="file" id="avatarUpload" (change)="onFileSelected($event)" style="display: none;">
+        </div>
+  
         <form #form="ngForm" (ngSubmit)="save()">
-            <div class="input-group">
-                <label for="pais">País</label>
-                <input type="text" name="pais" placeholder="Ex: Brasil" [(ngModel)]="selecao.pais" required>
-            </div>
-            <div class="input-group">
-                <label for="tecnico">Técnico</label>
-                <input type="text" name="tecnico" placeholder="Ex: Dorival Júnior" [(ngModel)]="selecao.tecnico"
-                    required>
-            </div>
-            <div class="input-group">
-                <label for="confederacao">Confederação</label>
-                <input type="text" name="confederacao" placeholder="Ex: CONMEBOL" [(ngModel)]="selecao.confederacao"
-                    required>
-            </div>
-            <div class="input-group">
-                <label for="ranking">Ranking FIFA</label>
-                <input type="number" name="ranking" placeholder="Ex: 5" [(ngModel)]="selecao.ranking_fifa" required>
-            </div>
-            <div class="input-group">
-                <label for="titulos">Títulos da Copa</label>
-                <input type="number" name="titulos" placeholder="Ex: 5" [(ngModel)]="selecao.titulos_copa" required>
-            </div>
-
-            <button type="submit" class="save-button">Salvar</button>
-            <button type="button" (click)="cancel()" class="cancel-button">Cancelar</button>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>País</mat-label>
+            <input matInput name="pais" placeholder="Ex: Brasil" [(ngModel)]="selecao.pais" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Técnico</mat-label>
+            <input matInput name="tecnico" placeholder="Ex: Dorival Júnior" [(ngModel)]="selecao.tecnico" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Confederação</mat-label>
+            <input matInput name="confederacao" placeholder="Ex: CONMEBOL" [(ngModel)]="selecao.confederacao" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Ranking FIFA</mat-label>
+            <input matInput type="number" name="ranking" placeholder="Ex: 5" [(ngModel)]="selecao.ranking_fifa" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Títulos da Copa</mat-label>
+            <input matInput type="number" name="titulos" placeholder="Ex: 5" [(ngModel)]="selecao.titulos_copa" required>
+          </mat-form-field>
+  
+          <div class="button-group">
+            <button mat-stroked-button type="button" (click)="cancel()">Cancelar</button>
+            <button mat-raised-button color="primary" type="submit">Salvar</button>
+          </div>
         </form>
-    </div>
-</div>
+      </mat-card-content>
+    </mat-card>
+  </div>

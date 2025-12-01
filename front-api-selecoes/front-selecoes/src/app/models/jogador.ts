@@ -8,9 +8,11 @@ export class Jogador {
   clube!: string;
   data_nascimento!: Date;
   selecao_id!: string;
-
+  
+  avatar?: string; 
   selecao?: Selecao;
-
   created_at!: Date;
   updated_at!: Date;
+
+  avatarUrl?: string; 
 }

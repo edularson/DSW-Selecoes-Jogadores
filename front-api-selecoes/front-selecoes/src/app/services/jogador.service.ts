@@ -30,4 +30,11 @@ export class JogadorService {
   public deleteJogador(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  public updateAvatar(id: string, file: File): Observable<Jogador> {
+    const formData = new FormData();
+    formData.append('avatar', file, file.name);
+
+    return this.http.patch<Jogador>(`${this.apiUrl}/${id}/avatar`, formData);
+  }
 }

@@ -1,231 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
 .dashboard-container {
-    min-height: 100vh;
-    width: 100%;
-    padding: 40px;
-    box-sizing: border-box;
-    background-color: #1a2a1a;
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('https://www.transparenttextures.com/patterns/grass-works.png');
-    font-family: 'Poppins', sans-serif;
-    color: #fff;
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  background-color: #1a2a1a;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url('https://www.transparenttextures.com/patterns/grass-works.png');
+  font-family: 'Poppins', sans-serif;
 }
 
 .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
+  background-color: rgba(10, 25, 10, 0.6) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 255, 127, 0.3);
+  color: #fff;
+  padding: 0 20px;
 }
-
-.dashboard-header h1 {
-    margin: 0;
-    font-size: 2rem;
+.spacer { flex: 1 1 auto; }
+.dashboard-header button {
+  margin-left: 15px;
+  font-weight: 500;
+  color: #ccc !important;
+  border-color: #555 !important;
 }
-
-.create-button {
-    background-color: #00ff7f;
-    color: #111;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.create-button:hover {
-    transform: scale(1.05);
+.dashboard-header button:hover {
+  color: #00ff7f !important;
+  border-color: #00ff7f !important;
+  background-color: rgba(0, 255, 127, 0.1) !important;
 }
 
 .table-container {
-    background-color: rgba(10, 25, 10, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 255, 127, 0.2);
-    border-radius: 15px;
-    padding: 20px;
+  max-width: 1400px;
+  margin: 20px auto;
+  background-color: rgba(10, 25, 10, 0.6) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 127, 0.2);
+  color: #fff;
+  padding: 0 !important;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  background-color: transparent !important;
 }
 
-th,
-td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+::ng-deep .mat-table {
+  background-color: transparent !important;
 }
 
-thead th {
-    color: #00ff7f;
-    text-transform: uppercase;
-    font-size: 0.9rem;
+::ng-deep .mat-mdc-header-cell {
+  background-color: transparent !important;
+  color: #00ff7f !important;
+  font-size: 0.9rem;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  font-weight: 600;
 }
 
-tbody tr:last-child td {
-    border-bottom: none;
+::ng-deep .mat-mdc-cell {
+  color: #ffffff !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  vertical-align: middle;
 }
 
-tbody td {
-    color: #ccc;
+::ng-deep .mat-mdc-row:hover {
+  background-color: rgba(0, 255, 127, 0.05) !important;
 }
 
-tbody td:first-child {
-    font-weight: 600;
-    color: #fff;
+
+::ng-deep .mat-column-avatar,
+::ng-deep .mat-column-posicao,
+::ng-deep .mat-column-numero,
+::ng-deep .mat-column-clube,
+::ng-deep .mat-column-selecao,
+::ng-deep .mat-column-acoes {
+  text-align: center;
+  justify-content: center; 
 }
 
-.actions button {
-    margin-right: 10px;
-    background: transparent;
-    border: 1px solid;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
+::ng-deep .mat-column-nome {
+  text-align: left;
+  justify-content: flex-start;
+  padding-left: 20px !important; 
+  font-weight: 600 !important;
 }
 
-.edit-button {
-    color: #5bc0de;
-    border-color: #5bc0de;
+
+.jogador-avatar-image {
+  width: 60px; 
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #555;
+  vertical-align: middle;
 }
 
-.delete-button {
-    color: #d9534f;
-    border-color: #d9534f;
+.actions {
+  white-space: nowrap;
 }
 
-.edit-button:hover {
-    background-color: #5bc0de;
-    color: #fff;
-}
+::ng-deep .mat-icon-button[color="accent"] { color: #00ff7f !important; }
+::ng-deep .mat-icon-button[color="primary"] { color: #5bc0de !important; }
+::ng-deep .mat-icon-button[color="warn"] { color: #d9534f !important; }
 
-.delete-button:hover {
-    background-color: #d9534f;
-    color: #fff;
-}
-
-.dashboard-container {
-    min-height: 100vh;
-    width: 100%;
-    padding: 40px;
-    box-sizing: border-box;
-    background-color: #1a2a1a;
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('https://www.transparenttextures.com/patterns/grass-works.png');
-    font-family: 'Poppins', sans-serif;
-    color: #fff;
-}
-
-.dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.dashboard-header h1 {
-    margin: 0;
-    font-size: 2rem;
-}
-
-.create-button,
-.back-button {
-    border: none;
-    padding: 10px 25px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-left: 15px;
-}
-
-.create-button {
-    background-color: #00ff7f;
-    color: #111;
-}
-
-.create-button:hover {
-    transform: scale(1.05);
-}
-
-.back-button {
-    background-color: transparent;
-    color: #ccc;
-    border: 2px solid #555;
-}
-
-.back-button:hover {
-    background-color: #555;
-    color: #fff;
-}
-
-.table-container {
-    background-color: rgba(10, 25, 10, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 255, 127, 0.2);
-    border-radius: 15px;
-    padding: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-thead th {
-    color: #00ff7f;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-}
-
-tbody tr:last-child td {
-    border-bottom: none;
-}
-
-tbody td {
-    color: #ccc;
-}
-
-tbody td:first-child {
-    font-weight: 600;
-    color: #fff;
-}
-
-.actions button {
-    margin-right: 10px;
-    background: transparent;
-    border: 1px solid;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.edit-button {
-    color: #5bc0de;
-    border-color: #5bc0de;
-}
-
-.delete-button {
-    color: #d9534f;
-    border-color: #d9534f;
-}
-
-.edit-button:hover {
-    background-color: #5bc0de;
-    color: #fff;
-}
-
-.delete-button:hover {
-    background-color: #d9534f;
-    color: #fff;
+.mat-mdc-no-data-row td {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #ffffff !important;
 }

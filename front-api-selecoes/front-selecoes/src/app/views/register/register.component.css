@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+.login-container {
+  height: 100vh;
+  width: 100%;
+  background-color: #1a2a1a;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url('https://www.transparenttextures.com/patterns/grass-works.png');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: rgba(10, 25, 10, 0.6) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 127, 0.3);
+  box-shadow: 0 0 25px rgba(0, 255, 127, 0.2) !important;
+  border-radius: 10px;
+  color: #ffffff !important;
+}
+
+::ng-deep .login-card .mat-card-title {
+  color: #E0E0E0 !important;
+  font-size: 2.8rem !important;
+  font-weight: 700 !important;
+  text-align: center;
+  margin-bottom: 30px !important;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 20px !important;
+}
+
+::ng-deep .login-card .mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+::ng-deep .login-card .mat-mdc-form-field .mdc-notched-outline > * {
+  border-color: rgba(0, 255, 127, 0.5) !important;
+}
+::ng-deep .login-card .mat-mdc-form-field .mat-mdc-floating-label {
+  color: #F0F0F0 !important;
+  font-weight: 400;
+}
+::ng-deep .login-card .mat-mdc-form-field input.mat-mdc-input-element {
+  color: #FFFFFF !important;
+  caret-color: #00ff7f !important;
+  font-size: 1.1rem;
+}
+::ng-deep .login-card .mat-mdc-form-field .mat-icon {
+  color: #00ff7f !important;
+}
+::ng-deep .login-card .mat-mdc-form-field.mat-focused .mdc-notched-outline > * {
+  border-color: #00ff7f !important;
+  border-width: 2px !important;
+}
+::ng-deep .login-card .mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+  color: #00ff7f !important;
+}
+
+
+.login-button {
+  width: 100%;
+  padding: 18px 0 !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  background-color: #00ff7f !important;
+  color: #111 !important;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.login-button:hover {
+  background-color: #00e676 !important;
+  box-shadow: 0 0 15px rgba(0, 255, 127, 0.6) !important;
+}
+
+.footer-actions {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ccc;
+    font-size: 0.9rem;
+  }
+  
+  .footer-actions button {
+    color: #00ff7f !important;
+    font-weight: 600;
+    margin-top: 5px;
+  }

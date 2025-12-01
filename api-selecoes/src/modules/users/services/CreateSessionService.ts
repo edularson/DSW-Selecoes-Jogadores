@@ -20,7 +20,6 @@ export default class CreateSessionService {
   public async execute({ email, password }: IRequest): Promise<IResponse> {
     const usersRepository = getCustomRepository(UserRepository);
 
-    // Usando nosso método customizado
     const user = await usersRepository.findByEmail(email);
 
     if (!user) {

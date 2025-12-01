@@ -128,5 +128,3 @@ Antes de começar, você precisará ter instalado na sua máquina:
 
     🎉 O front-end estará disponível no seu navegador em `http://localhost:4200`. A aplicação se conectará automaticamente à API que está rodando.
 
-
-Feito por **[Eduardo Larson]** 👋

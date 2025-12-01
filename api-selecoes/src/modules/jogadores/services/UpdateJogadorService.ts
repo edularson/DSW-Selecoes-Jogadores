@@ -19,7 +19,6 @@ export default class UpdateJogadorService {
     const jogadoresRepository = getCustomRepository(JogadorRepository);
     const selecoesRepository = getCustomRepository(SelecaoRepository);
 
-    // Usamos o findOne simples aqui, pois não precisamos da relação para o update
     const jogador = await jogadoresRepository.findOne(data.id);
     if (!jogador) {
       throw new AppError('Player not found.', 404);

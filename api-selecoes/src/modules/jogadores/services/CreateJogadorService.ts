@@ -18,7 +18,6 @@ export default class CreateJogadorService {
     const jogadoresRepository = getCustomRepository(JogadorRepository);
     const selecoesRepository = getCustomRepository(SelecaoRepository);
 
-    // Usando o método customizado do SelecaoRepository
     const selecao = await selecoesRepository.findById(data.selecao_id);
     if (!selecao) {
       throw new AppError('Team not found.');

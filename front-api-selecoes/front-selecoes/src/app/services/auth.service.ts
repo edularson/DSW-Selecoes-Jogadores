@@ -7,16 +7,40 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3333/sessions';
+  private sessionsUrl = 'http://localhost:3333/sessions';
+  private usersUrl = 'http://localhost:3333/users';
 
   constructor(private http: HttpClient) { }
 
   public login(user: User): Observable<any> {
-    return this.http.post(this.apiUrl, user);
+    return this.http.post(this.sessionsUrl, user);
   }
 
-  public setToken(token: string): void {
+  public createUser(user: User): Observable<User> {
+    return this.http.post<User>(this.usersUrl, user);
+  }
+
+  public updateAvatar(file: File): Observable<User> {
+    const formData = new FormData();
+    formData.append('avatar', file, file.name);
+    return this.http.patch<User>(`${this.usersUrl}/avatar`, formData);
+  }
+
+  public saveSession(token: string, user: User): void {
     localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  public saveUser(user: User): void {
+     localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  public getUser(): User | null {
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      return JSON.parse(userString) as User;
+    }
+    return null;
   }
 
   public getToken(): string | null {
@@ -26,7 +50,9 @@ export class AuthService {
   public isAuthenticated(): boolean {
     return this.getToken() !== null;
   }
+
   public logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 }

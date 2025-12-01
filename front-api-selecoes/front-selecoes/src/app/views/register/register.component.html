@@ -1,0 +1,36 @@
+<div class="login-container">
+    <mat-card class="login-card">
+      <mat-card-title>Criar Conta</mat-card-title>
+      
+      <form (ngSubmit)="register()">
+        
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nome Completo</mat-label>
+          <input matInput type="text" [(ngModel)]="user.name" name="name" required>
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="user.email" name="email" required>
+          <mat-icon matSuffix>mail</mat-icon>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" [(ngModel)]="user.password" name="password" required>
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" type="submit" class="login-button">
+          Cadastrar
+        </button>
+  
+        <div class="footer-actions">
+          <span>Já tem uma conta?</span>
+          <button mat-button (click)="cancel()">Fazer Login</button>
+        </div>
+  
+      </form>
+    </mat-card>
+  </div>

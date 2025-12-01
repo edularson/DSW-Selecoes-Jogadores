@@ -10,7 +10,7 @@ interface IRequest {
 export default class ShowJogadorService {
   public async execute({ id }: IRequest): Promise<Jogador> {
     const jogadoresRepository = getCustomRepository(JogadorRepository);
-    const jogador = await jogadoresRepository.findById(id); // Usando nosso novo método
+    const jogador = await jogadoresRepository.findById(id);
 
     if (!jogador) {
       throw new AppError('Player not found.', 404);

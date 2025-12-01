@@ -2,20 +2,23 @@ import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 import SelecoesController from '../controllers/SelecoesController';
 import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
+import multer from 'multer';
+import uploadConfig from '@config/upload';
+import SelecaoAvatarController from '../controllers/SelecaoAvatarController'; // Import novo
 
 const selecoesRouter = Router();
 const selecoesController = new SelecoesController();
+const selecaoAvatarController = new SelecaoAvatarController(); // Instância nova
+const upload = multer(uploadConfig);
 
-// Aplica autenticação para todas as rotas de Seleção
 selecoesRouter.use(isAuthenticated);
 
-// Rota para listar todas as seleções
 selecoesRouter.get('/', (request, response) => {
   return selecoesController.index(request, response);
-});
-
-// Rota para ver uma seleção específica pelo ID
-selecoesRouter.get(
+ });
+ 
+ 
+ selecoesRouter.get(
   '/:id',
   celebrate({
     [Segments.PARAMS]: { id: Joi.string().uuid().required() },
@@ -23,13 +26,12 @@ selecoesRouter.get(
   (request, response) => {
     return selecoesController.show(request, response);
   }
-);
-
-// Rota para criar uma nova seleção
-selecoesRouter.post(
+ );
+ 
+ 
+ selecoesRouter.post(
   '/',
   celebrate({
-    // AQUI ESTÁ A VALIDAÇÃO COMPLETA QUE FALTAVA
     [Segments.BODY]: {
       pais: Joi.string().required(),
       tecnico: Joi.string().required(),
@@ -41,14 +43,13 @@ selecoesRouter.post(
   (request, response) => {
     return selecoesController.create(request, response);
   }
-);
-
-// Rota para atualizar uma seleção
-selecoesRouter.put(
+ );
+ 
+ 
+ selecoesRouter.put(
     '/:id',
     celebrate({
       [Segments.PARAMS]: { id: Joi.string().uuid().required() },
-      // AQUI ESTÁ A CORREÇÃO:
       [Segments.BODY]: Joi.object({
         pais: Joi.string().required(),
         tecnico: Joi.string().required(),
@@ -61,9 +62,9 @@ selecoesRouter.put(
       return selecoesController.update(request, response);
     }
   );
-
-// Rota para deletar uma seleção
-selecoesRouter.delete(
+ 
+ 
+ selecoesRouter.delete(
   '/:id',
   celebrate({
     [Segments.PARAMS]: { id: Joi.string().uuid().required() },
@@ -71,6 +72,15 @@ selecoesRouter.delete(
   (request, response) => {
     return selecoesController.delete(request, response);
   }
+ );
+ 
+
+selecoesRouter.patch(
+  '/:id/avatar', // Rota com ID
+  upload.single('avatar'),
+  (request, response) => {
+    return selecaoAvatarController.update(request, response);
+  },
 );
 
 export default selecoesRouter;

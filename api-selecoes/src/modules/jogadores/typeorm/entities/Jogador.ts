@@ -1,38 +1,47 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import Selecao from '../../../selecoes/typeorm/entities/Selecao';
+import Selecao from '@modules/selecoes/typeorm/entities/Selecao';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('jogadores')
-class Jogador {
+export default class Jogador {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  nome: string;
+  nome!: string;
 
   @Column()
-  posicao: string;
+  posicao!: string;
 
   @Column('int')
-  numero: number;
+  numero!: number;
 
   @Column()
-  clube: string;
+  clube!: string;
 
   @Column('date')
-  data_nascimento: Date;
+  data_nascimento!: Date;
+
+  @Column({ nullable: true })
+  avatar?: string;
 
   @ManyToOne(() => Selecao, selecao => selecao.jogadores)
   @JoinColumn({ name: 'selecao_id' })
-  selecao: Selecao;
+  selecao!: Selecao;
 
   @Column()
-  selecao_id: string;
+  selecao_id!: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 }
-
-export default Jogador;

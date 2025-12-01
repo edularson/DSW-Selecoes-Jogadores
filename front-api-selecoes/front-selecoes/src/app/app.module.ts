@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './modules/material/material.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
@@ -11,6 +13,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { SelecaoFormComponent } from './views/selecao-form/selecao-form.component';
 import { JogadorListComponent } from './views/jogador-list/jogador-list.component';
 import { JogadorFormComponent } from './views/jogador-form/jogador-form.component';
+import { RegisterComponent } from './views/register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,20 +22,24 @@ import { JogadorFormComponent } from './views/jogador-form/jogador-form.componen
     LoginComponent,
     SelecaoFormComponent,
     JogadorListComponent,
-    JogadorFormComponent
+    JogadorFormComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
 })
