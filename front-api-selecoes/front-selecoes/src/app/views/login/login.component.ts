@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-login',
@@ -11,21 +12,35 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   user: User = new User();
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   login() {
     this.authService.login(this.user).subscribe({
       next: (response) => {
         this.authService.saveSession(response.token, response.user);
+        this.showMessage('Login realizado com sucesso!');
         this.router.navigate(['/home']);
       },
       error: (err) => {
-        alert(err.error.message);
+        this.showMessage(err.error.message, true);
       }
     });
   }
 
   goToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  showMessage(msg: string, isError: boolean = false): void {
+    this.snackBar.open(msg, 'Fechar', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: isError ? ['msg-error'] : ['msg-success']
+    });
   }
 }

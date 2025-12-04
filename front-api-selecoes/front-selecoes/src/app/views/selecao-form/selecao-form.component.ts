@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Selecao } from 'src/app/models/selecao';
 import { SelecaoService } from 'src/app/services/selecao.service';
 
@@ -12,7 +13,6 @@ export class SelecaoFormComponent implements OnInit {
   selecao: Selecao = new Selecao();
   isEditMode: boolean = false;
   pageTitle: string = 'Nova Seleção';
-
   avatarUrl: string | null = null;
   readonly apiBaseUrl = 'http://localhost:3333';
   readonly defaultAvatar = 'assets/default-avatar.png';
@@ -21,7 +21,8 @@ export class SelecaoFormComponent implements OnInit {
   constructor(
     private selecaoService: SelecaoService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -59,12 +60,12 @@ export class SelecaoFormComponent implements OnInit {
     if (this.isEditMode) {
       this.selecaoService.updateAvatar(this.selecao.id, this.selectedFile).subscribe({
         next: (updatedSelecao) => {
-          alert('Avatar atualizado!');
+          this.showMessage('Avatar atualizado!');
           this.selecao = updatedSelecao;
           this.buildAvatarUrl();
           this.selectedFile = null;
         },
-        error: (err) => alert(err.error.message)
+        error: (err) => this.showMessage(err.error.message, true)
       });
     } else {
       const reader = new FileReader();
@@ -79,10 +80,10 @@ export class SelecaoFormComponent implements OnInit {
     if (this.isEditMode) {
       this.selecaoService.updateSelecao(this.selecao.id, this.selecao).subscribe({
         next: () => {
-          alert('Seleção atualizada!');
+          this.showMessage('Seleção atualizada com sucesso!');
           this.router.navigate(['/home']);
         },
-        error: (err) => alert(err.error.message)
+        error: (err) => this.showMessage(err.error.message, true)
       });
     } else {
       this.selecaoService.createSelecao(this.selecao).subscribe({
@@ -90,21 +91,30 @@ export class SelecaoFormComponent implements OnInit {
           if (this.selectedFile) {
             this.selecaoService.updateAvatar(novaSelecao.id, this.selectedFile).subscribe({
               next: () => {
-                alert('Seleção cadastrada com sucesso!');
+                this.showMessage('Seleção cadastrada com sucesso!');
                 this.router.navigate(['/home']);
               }
             });
           } else {
-            alert('Seleção cadastrada com sucesso!');
+            this.showMessage('Seleção cadastrada com sucesso!');
             this.router.navigate(['/home']);
           }
         },
-        error: (err) => alert(err.error.message)
+        error: (err) => this.showMessage(err.error.message, true)
       });
     }
   }
 
   cancel(): void {
     this.router.navigate(['/home']);
+  }
+
+  showMessage(msg: string, isError: boolean = false): void {
+    this.snackBar.open(msg, 'Fechar', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: isError ? ['msg-error'] : ['msg-success']
+    });
   }
 }

@@ -4,11 +4,12 @@ import SelecoesController from '../controllers/SelecoesController';
 import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
-import SelecaoAvatarController from '../controllers/SelecaoAvatarController'; // Import novo
+import SelecaoAvatarController from '../controllers/SelecaoAvatarController'; 
+
 
 const selecoesRouter = Router();
 const selecoesController = new SelecoesController();
-const selecaoAvatarController = new SelecaoAvatarController(); // Instância nova
+const selecaoAvatarController = new SelecaoAvatarController();
 const upload = multer(uploadConfig);
 
 selecoesRouter.use(isAuthenticated);

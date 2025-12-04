@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Jogador } from 'src/app/models/jogador';
 import { JogadorService } from 'src/app/services/jogador.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-jogador-list',
@@ -15,12 +18,14 @@ export class JogadorListComponent implements OnInit {
   readonly defaultAvatar = 'assets/default-avatar.png';
   
   displayedColumns: string[] = ['avatar', 'nome', 'posicao', 'numero', 'clube', 'selecao', 'acoes'];
-  
   dataSource = new MatTableDataSource<Jogador>();
+  jogadores: Jogador[] = [];
 
   constructor(
     private jogadorService: JogadorService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -33,9 +38,10 @@ export class JogadorListComponent implements OnInit {
         ...jogador,
         avatarUrl: jogador.avatar
           ? `${this.apiBaseUrl}/files/${jogador.avatar}`
-          : this.defaultAvatar // Usa a imagem local
+          : this.defaultAvatar
       }));
       this.dataSource.data = jogadoresComAvatar;
+      this.jogadores = jogadoresComAvatar; 
     });
   }
 
@@ -48,10 +54,10 @@ export class JogadorListComponent implements OnInit {
     if (file) {
       this.jogadorService.updateAvatar(jogador.id, file).subscribe({
         next: (updatedJogador) => {
-          alert(`Avatar do ${updatedJogador.nome} atualizado!`);
+          this.showMessage(`Avatar do ${updatedJogador.nome} atualizado!`);
           this.loadJogadores();
         },
-        error: (err) => alert(err.error.message)
+        error: (err) => this.showMessage(err.error.message, true)
       });
     }
   }
@@ -69,14 +75,29 @@ export class JogadorListComponent implements OnInit {
   }
 
   deleteJogador(id: string): void {
-    if (confirm('Tem certeza que deseja deletar este jogador?')) {
-      this.jogadorService.deleteJogador(id).subscribe({
-        next: () => {
-          alert('Jogador deletado com sucesso!');
-          this.loadJogadores(); // Recarrega a tabela
-        },
-        error: (err) => alert(err.error.message)
-      });
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { message: 'Tem certeza que deseja deletar este jogador?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.jogadorService.deleteJogador(id).subscribe({
+          next: () => {
+            this.showMessage('Jogador deletado com sucesso!');
+            this.loadJogadores();
+          },
+          error: (err) => this.showMessage(err.error.message, true)
+        });
+      }
+    });
+  }
+
+  showMessage(msg: string, isError: boolean = false): void {
+    this.snackBar.open(msg, 'Fechar', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: isError ? ['msg-error'] : ['msg-success']
+    });
   }
 }

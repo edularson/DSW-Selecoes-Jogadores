@@ -1,0 +1,21 @@
+h2 {
+    color: #00ff7f !important;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+  }
+  
+  button[mat-stroked-button] {
+    color: #ffffff !important;
+    border-color: #555 !important;
+  }
+  
+  button[mat-raised-button] {
+    background-color: #d9534f !important;
+    color: white !important;
+  }

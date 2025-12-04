@@ -4,16 +4,15 @@ import JogadoresController from '../controllers/JogadoresController';
 import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
-import JogadorAvatarController from '../controllers/JogadorAvatarController'; // Import novo
+import JogadorAvatarController from '../controllers/JogadorAvatarController';
 
 const jogadoresRouter = Router();
 const jogadoresController = new JogadoresController();
-const jogadorAvatarController = new JogadorAvatarController(); // Instância nova
+const jogadorAvatarController = new JogadorAvatarController();
 const upload = multer(uploadConfig);
 
 jogadoresRouter.use(isAuthenticated);
 
-// --- Rotas CRUD ---
 jogadoresRouter.get('/', (request, response) => {
   return jogadoresController.index(request, response);
  });
@@ -74,7 +73,6 @@ jogadoresRouter.get('/', (request, response) => {
  );
  
 
-// --- ROTA NOVA PARA O AVATAR DO JOGADOR ---
 jogadoresRouter.patch(
   '/:id/avatar', // Rota com ID
   upload.single('avatar'),

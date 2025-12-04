@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Jogador } from 'src/app/models/jogador';
 import { Selecao } from 'src/app/models/selecao';
 import { JogadorService } from 'src/app/services/jogador.service';
@@ -11,12 +12,10 @@ import { SelecaoService } from 'src/app/services/selecao.service';
   styleUrls: ['./jogador-form.component.css']
 })
 export class JogadorFormComponent implements OnInit {
-
   jogador: Jogador = new Jogador();
   selecoes: Selecao[] = [];
   isEditMode: boolean = false;
   pageTitle: string = 'Novo Jogador';
-  
   avatarUrl: string | null = null;
   readonly apiBaseUrl = 'http://localhost:3333';
   readonly defaultAvatar = 'assets/default-avatar.png';
@@ -26,7 +25,8 @@ export class JogadorFormComponent implements OnInit {
     private jogadorService: JogadorService,
     private selecaoService: SelecaoService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -68,15 +68,14 @@ export class JogadorFormComponent implements OnInit {
     if (this.isEditMode) {
       this.jogadorService.updateAvatar(this.jogador.id, this.selectedFile).subscribe({
         next: (updatedJogador) => {
-          alert('Avatar atualizado!');
+          this.showMessage('Avatar atualizado!');
           this.jogador = updatedJogador;
           this.buildAvatarUrl();
           this.selectedFile = null;
         },
-        error: (err) => alert(err.error.message)
+        error: (err) => this.showMessage(err.error.message, true)
       });
-    } 
-    else {
+    } else {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.avatarUrl = e.target.result;
@@ -89,10 +88,10 @@ export class JogadorFormComponent implements OnInit {
     if (this.isEditMode) {
       this.jogadorService.updateJogador(this.jogador.id, this.jogador).subscribe({
         next: () => {
-          alert('Jogador atualizado!');
+          this.showMessage('Jogador atualizado com sucesso!');
           this.router.navigate(['/jogadores']);
         },
-        error: (err) => alert(err.error.message)
+        error: (err) => this.showMessage(err.error.message, true)
       });
     } else {
       this.jogadorService.createJogador(this.jogador).subscribe({
@@ -100,21 +99,30 @@ export class JogadorFormComponent implements OnInit {
           if (this.selectedFile) {
             this.jogadorService.updateAvatar(novoJogador.id, this.selectedFile).subscribe({
               next: () => {
-                alert('Jogador cadastrado com sucesso!');
+                this.showMessage('Jogador cadastrado com sucesso!');
                 this.router.navigate(['/jogadores']);
               }
             });
           } else {
-            alert('Jogador cadastrado com sucesso!');
+            this.showMessage('Jogador cadastrado com sucesso!');
             this.router.navigate(['/jogadores']);
           }
         },
-        error: (err) => alert(err.error.message)
+        error: (err) => this.showMessage(err.error.message, true)
       });
     }
   }
 
   cancel(): void {
     this.router.navigate(['/jogadores']);
+  }
+
+  showMessage(msg: string, isError: boolean = false): void {
+    this.snackBar.open(msg, 'Fechar', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: isError ? ['msg-error'] : ['msg-success']
+    });
   }
 }

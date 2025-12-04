@@ -1,52 +1,54 @@
 <div class="form-container">
-    <mat-card class="form-card">
-      <mat-card-header>
-        <mat-card-title>{{ pageTitle }}</mat-card-title>
-      </mat-card-header>
-  
-      <mat-card-content>
-        
-        <div class="avatar-section">
-          <img [src]="avatarUrl" alt="Avatar da Seleção" class="avatar-image">
-          
-          <button mat-mini-fab color="primary" class="upload-fab-button" (click)="triggerFileInput()" matTooltip="Mudar Avatar">
-            <mat-icon>edit</mat-icon>
-          </button>
-  
-          <input type="file" id="avatarUpload" (change)="onFileSelected($event)" style="display: none;">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>{{ pageTitle }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="avatar-section">
+        <img [src]="avatarUrl" alt="Avatar da Seleção" class="avatar-image">
+        <button *ngIf="isEditMode" mat-mini-fab color="primary" class="upload-fab-button" (click)="triggerFileInput()" matTooltip="Mudar Avatar">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <input type="file" id="avatarUpload" (change)="onFileSelected($event)" style="display: none;">
+      </div>
+
+      <form #form="ngForm" (ngSubmit)="save()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>País</mat-label>
+          <input matInput name="pais" placeholder="Ex: Brasil" [(ngModel)]="selecao.pais" required #paisInput="ngModel">
+          <mat-error *ngIf="paisInput.invalid">Nome do país é obrigatório</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Técnico</mat-label>
+          <input matInput name="tecnico" placeholder="Ex: Dorival Júnior" [(ngModel)]="selecao.tecnico" required #tecInput="ngModel">
+          <mat-error *ngIf="tecInput.invalid">Nome do técnico é obrigatório</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Confederação</mat-label>
+          <input matInput name="confederacao" placeholder="Ex: CONMEBOL" [(ngModel)]="selecao.confederacao" required #confInput="ngModel">
+          <mat-error *ngIf="confInput.invalid">Confederação é obrigatória</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Ranking FIFA</mat-label>
+          <input matInput type="number" name="ranking" placeholder="Ex: 5" [(ngModel)]="selecao.ranking_fifa" required #rankInput="ngModel">
+          <mat-error *ngIf="rankInput.invalid">Campo obrigatório</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Títulos da Copa</mat-label>
+          <input matInput type="number" name="titulos" placeholder="Ex: 5" [(ngModel)]="selecao.titulos_copa" required #titleInput="ngModel">
+          <mat-error *ngIf="titleInput.invalid">Campo obrigatório</mat-error>
+        </mat-form-field>
+
+        <div class="button-group">
+          <button mat-stroked-button type="button" (click)="cancel()">Cancelar</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Salvar</button>
         </div>
-  
-        <form #form="ngForm" (ngSubmit)="save()">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>País</mat-label>
-            <input matInput name="pais" placeholder="Ex: Brasil" [(ngModel)]="selecao.pais" required>
-          </mat-form-field>
-  
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Técnico</mat-label>
-            <input matInput name="tecnico" placeholder="Ex: Dorival Júnior" [(ngModel)]="selecao.tecnico" required>
-          </mat-form-field>
-  
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Confederação</mat-label>
-            <input matInput name="confederacao" placeholder="Ex: CONMEBOL" [(ngModel)]="selecao.confederacao" required>
-          </mat-form-field>
-  
-          <mat-form-field appearance="outline" class="half-width">
-            <mat-label>Ranking FIFA</mat-label>
-            <input matInput type="number" name="ranking" placeholder="Ex: 5" [(ngModel)]="selecao.ranking_fifa" required>
-          </mat-form-field>
-  
-          <mat-form-field appearance="outline" class="half-width">
-            <mat-label>Títulos da Copa</mat-label>
-            <input matInput type="number" name="titulos" placeholder="Ex: 5" [(ngModel)]="selecao.titulos_copa" required>
-          </mat-form-field>
-  
-          <div class="button-group">
-            <button mat-stroked-button type="button" (click)="cancel()">Cancelar</button>
-            <button mat-raised-button color="primary" type="submit">Salvar</button>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

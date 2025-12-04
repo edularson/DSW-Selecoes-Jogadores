@@ -14,6 +14,7 @@ import { SelecaoFormComponent } from './views/selecao-form/selecao-form.componen
 import { JogadorListComponent } from './views/jogador-list/jogador-list.component';
 import { JogadorFormComponent } from './views/jogador-form/jogador-form.component';
 import { RegisterComponent } from './views/register/register.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RegisterComponent } from './views/register/register.component';
     SelecaoFormComponent,
     JogadorListComponent,
     JogadorFormComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

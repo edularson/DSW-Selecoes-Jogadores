@@ -9,9 +9,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select'; 
+import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const materialModules = [
   MatCardModule,
@@ -23,9 +25,12 @@ const materialModules = [
   MatTooltipModule,
   MatTableModule,
   MatPaginatorModule,
-  MatSelectModule, 
-  MatDatepickerModule, 
-  MatNativeDateModule 
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSnackBarModule,
+  MatSnackBarModule,
+  MatDialogModule
 ];
 
 @NgModule({

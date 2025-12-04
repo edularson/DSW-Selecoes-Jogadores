@@ -7,11 +7,9 @@
     <mat-card-content>
       <div class="avatar-section">
         <img [src]="avatarUrl" alt="Avatar do Jogador" class="jogador-avatar-image">
-        
         <button mat-mini-fab color="primary" class="upload-fab-button" (click)="triggerFileInput()" matTooltip="Escolher Foto">
           <mat-icon>edit</mat-icon>
         </button>
-
         <input type="file" id="avatarUpload" (change)="onFileSelected($event)" style="display: none;">
       </div>
 
@@ -19,43 +17,49 @@
         
         <mat-form-field appearance="outline" class="half-width">
           <mat-label>Nome do Jogador</mat-label>
-          <input matInput name="nome" [(ngModel)]="jogador.nome" required>
+          <input matInput name="nome" [(ngModel)]="jogador.nome" required #nomeInput="ngModel">
+          <mat-error *ngIf="nomeInput.invalid">Nome é obrigatório</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="half-width">
           <mat-label>Posição</mat-label>
-          <input matInput name="posicao" [(ngModel)]="jogador.posicao" required>
+          <input matInput name="posicao" [(ngModel)]="jogador.posicao" required #posInput="ngModel">
+          <mat-error *ngIf="posInput.invalid">Posição é obrigatória</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Seleção</mat-label>
-          <mat-select name="selecao_id" [(ngModel)]="jogador.selecao_id" required>
+          <mat-select name="selecao_id" [(ngModel)]="jogador.selecao_id" required #selInput="ngModel">
             <mat-option *ngFor="let selecao of selecoes" [value]="selecao.id">
               {{ selecao.pais }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="selInput.invalid">Selecione uma seleção</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="half-width">
           <mat-label>Número da Camisa</mat-label>
-          <input matInput type="number" name="numero" [(ngModel)]="jogador.numero" required>
+          <input matInput type="number" name="numero" [(ngModel)]="jogador.numero" required #numInput="ngModel">
+          <mat-error *ngIf="numInput.invalid">Número é obrigatório</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="half-width">
           <mat-label>Clube Atual</mat-label>
-          <input matInput name="clube" [(ngModel)]="jogador.clube" required>
+          <input matInput name="clube" [(ngModel)]="jogador.clube" required #clubeInput="ngModel">
+          <mat-error *ngIf="clubeInput.invalid">Clube é obrigatório</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Data de Nascimento</mat-label>
-          <input matInput [matDatepicker]="picker" name="data_nascimento" [(ngModel)]="jogador.data_nascimento" required>
+          <input matInput [matDatepicker]="picker" name="data_nascimento" [(ngModel)]="jogador.data_nascimento" required #dateInput="ngModel">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="dateInput.invalid">Data é obrigatória</mat-error>
         </mat-form-field>
 
         <div class="button-group">
           <button mat-stroked-button type="button" (click)="cancel()">Cancelar</button>
-          <button mat-raised-button color="primary" type="submit">Salvar</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Salvar</button>
         </div>
       </form>
     </mat-card-content>
