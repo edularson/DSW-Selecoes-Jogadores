@@ -1,0 +1,12 @@
+# Dependências instaladas pelo npm
+node_modules/
+
+# Artefatos locais
+.DS_Store
+dist/
+.angular/
+coverage/
+*.log
+.env
+.env.*
+!.env.example

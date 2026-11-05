@@ -2,7 +2,7 @@
 
 ## 📝 Descrição
 
-Este é um projeto full-stack desenvolvido como trabalho acadêmico, com o objetivo de criar uma API RESTful completa e segura e uma interface de usuário (front-end) para consumi-la. O núcleo do projeto é a implementação de um relacionamento **1:N (um para muitos)** entre duas entidades principais: **Seleções** de futebol e **Jogadores**.
+Este é um projeto full-stack desenvolvido como trabalho acadêmico, com o objetivo de criar uma API RESTful com autenticação e validação de entradas e uma interface de usuário (front-end) para consumi-la. O núcleo do projeto é a implementação de um relacionamento **1:N (um para muitos)** entre duas entidades principais: **Seleções** de futebol e **Jogadores**.
 
 O back-end gerencia todos os dados e a lógica de negócio, incluindo um sistema de autenticação com Tokens JWT. O front-end, construído em Angular, oferece uma interface reativa e amigável para interagir com a API, permitindo que usuários autenticados realizem todas as operações de CRUD para ambas as entidades.
 
@@ -27,7 +27,7 @@ O back-end gerencia todos os dados e a lógica de negócio, incluindo um sistema
   - **Docker:** Utilizado para criar um ambiente de banco de dados consistente e isolado.
   - **TypeORM:** ORM (Object-Relational Mapper) para a interação com o banco de dados.
   - **JWT (JSON Web Token):** Para a geração de tokens de autenticação.
-  - **Bcrypt.js:** Para a criptografia de senhas.
+  - **Bcrypt.js:** Para o hash de senhas.
   - **Celebrate / Joi:** Para a validação de dados de entrada da API.
 
 #### **Front-end (Aplicação Web)**
@@ -57,8 +57,15 @@ Antes de começar, você precisará ter instalado na sua máquina:
 
   - [Node.js](https://nodejs.org/en/) (recomenda-se usar o [NVM](https://github.com/nvm-sh/nvm) para gerenciar as versões)
   - [Docker](https://www.docker.com/products/docker-desktop/)
-  - [Angular CLI v15](https://angular.io/cli) (`npm install -g @angular/cli@15`)
+  - O Angular CLI v15 está nas dependências locais; não é necessário instalá-lo globalmente.
   - Um cliente de API como [Insomnia](https://insomnia.rest/) ou [Postman](https://www.postman.com/) (para testar a API diretamente).
+
+Clone o repositório antes de seguir os passos abaixo:
+
+```bash
+git clone https://github.com/edularson/DSW-Selecoes-Jogadores.git
+cd DSW-Selecoes-Jogadores
+```
 
 ### 📦 Back-end (API)
 
@@ -77,17 +84,17 @@ Antes de começar, você precisará ter instalado na sua máquina:
 3.  **Inicie o container do PostgreSQL com Docker (execute apenas na primeira vez):**
 
     ```bash
-    sudo docker run --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+    docker run --name postgres-selecoes -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:15
     ```
 
-    *Se o container já existir mas estiver parado, inicie-o com `docker start postgres`.*
+    *Se o container já existir mas estiver parado, inicie-o com `docker start postgres-selecoes`.*
 
 4.  **Crie o banco de dados:** Use uma ferramenta como DBeaver ou pgAdmin para criar um novo banco de dados chamado `api_selecoes` no seu servidor PostgreSQL local.
 
-5.  **Execute as migrations para criar as tabelas:**
+5.  **Configure e prepare o banco:** Confira as credenciais e o nome do banco em `ormconfig.json`. Na base `api_selecoes`, execute `CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`. Depois aplique as migrations:
 
     ```bash
-    npm run typeorm migration:run
+    npm run typeorm -- migration:run
     ```
 
 6.  **Inicie o servidor da API:**
@@ -105,13 +112,13 @@ Antes de começar, você precisará ter instalado na sua máquina:
 2.  **Navegue até a pasta do front-end:**
 
     ```bash
-    cd front-api-selecoes
+    cd front-api-selecoes/front-selecoes
     ```
 
 3.  **Garanta que você está usando a versão correta do Node.js (se estiver usando NVM):**
 
     ```bash
-    nvm use 18
+    # Use uma versão do Node compatível com Angular 15.2.
     ```
 
 4.  **Instale as dependências:**
@@ -123,8 +130,18 @@ Antes de começar, você precisará ter instalado na sua máquina:
 5.  **Inicie o servidor de desenvolvimento do Angular:**
 
     ```bash
-    ng serve
+    npm start
     ```
 
     🎉 O front-end estará disponível no seu navegador em `http://localhost:4200`. A aplicação se conectará automaticamente à API que está rodando.
 
+
+
+## Fluxo para experimentar
+
+1. Inicie a API e o frontend em terminais separados, a partir das pastas indicadas.
+2. Abra `http://localhost:4200` e cadastre um usuário.
+3. Faça login, cadastre uma seleção e depois um jogador associado a ela.
+4. Experimente listagem, edição, exclusão e envio de avatar.
+
+O frontend utiliza URLs de API em `src/app/services`. Para mudar o endereço do backend, atualize os services correspondentes. As dependências são instaladas pelo npm; `node_modules` não faz parte do código-fonte versionado.
